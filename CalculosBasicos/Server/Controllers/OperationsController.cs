@@ -15,7 +15,7 @@ namespace CalculosBasicos.Server.Controllers
         {
             _operationsBussiness = operationsBussiness;
         }
-
+         
         [HttpPost]
         public async Task<ResultOperation> Index(SendOperation dataOperations)  
         {

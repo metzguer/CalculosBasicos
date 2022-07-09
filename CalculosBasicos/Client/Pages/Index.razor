@@ -1,5 +1,9 @@
 ﻿@page "/"
 @using CalculosBasicos.Shared.Utils
+@using CalculosBasicos.Shared.Enums
+@using CalculosBasicos.Client.Shared.Inputs
+@using CalculosBasicos.Client.Shared.Messages
+
 <PageTitle>Operaciones</PageTitle>
 
 <h1 class="mt-1 mb-3">Operaciones</h1>
@@ -7,30 +11,25 @@
 <div class="row">
    
     <div class="col-8 mt-3 row">
-       <div class="col-sm-12">
-            <form class="mt-3"> 
-                <div class="form-group">
-                    <label for="valor1" class="mb-2">Ingresa el valor 1</label>
-                    <input type="text" class="form-control" @onkeyup="ValidateField1" @bind="@Field1" @bind:event="oninput"> 
-                    <p class="text-danger "> @MessageField1 </p> 
-                </div>
-         
-                <div class="form-group">
-                    <label for="valor2" class="mb-2">Ingresa el valor 2</label>
-                    <input type="text" class="form-control" @onkeyup="ValidateField2" @bind="@Field2" @bind:event="oninput">
-                    <p class="text-danger "> @MessageField2 </p> 
-                </div> 
-            </form>
+       <div class="col-sm-12 mt-3">
+            
+            <NumberInput 
+                Id="@Field1" 
+                Label="Ingresa el valor 1" 
+                FieldValue="@Field1" 
+                OnKeyUpCallback="SetValue1" /> 
+                     
+            <NumberInput 
+                Id="@Field2" 
+                Label="Ingresa el valor 2" 
+                FieldValue="@Field2" 
+                OnKeyUpCallback="SetValue2" /> 
+            
        </div>
 
-        <div class="col-sm-12 texto-format">
-            @Message
-        </div>
-
-        <div class="col-sm-12 text-danger">
-            @Errors
-        </div>
-         
+       <Messages Level="LevelMessage.Success" Message="@Message" />  
+       <Messages Level="LevelMessage.Error" Message="@Errors" /> 
+        
     </div>
 
     <div class="col-sm-3 ">

@@ -1,11 +1,6 @@
 ﻿using CalculosBasicos.Bussiness.Contracts;
 using CalculosBasicos.Bussiness.Response;
-using CalculosBasicos.Bussiness.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CalculosBasicos.Bussiness.Utils; 
 
 namespace CalculosBasicos.Bussiness.Implements
 {

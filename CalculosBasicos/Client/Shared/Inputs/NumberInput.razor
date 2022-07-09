@@ -1,0 +1,5 @@
+﻿  <div class="form-group">
+    <label for="@Id" class="mb-2">@Label</label>
+    <input type="text" class="form-control" id="@Id" @onkeyup="ValidateField2" @bind="@FieldValue" @bind:event="oninput">
+    <p class="text-danger ">@ErrorField </p> 
+</div> 

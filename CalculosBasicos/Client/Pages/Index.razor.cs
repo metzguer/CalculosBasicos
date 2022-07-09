@@ -11,9 +11,7 @@ namespace CalculosBasicos.Client.Pages
 {
     public partial class Index
     {
-        [Inject] public HttpClient Http { get; set; }
-        private string? MessageField1 { get; set; } 
-        private string? MessageField2 { get; set; } 
+        [Inject] public HttpClient Http { get; set; } 
         private string? Field1 { get; set; }
         private string? Field2 { get; set; }
 
@@ -21,30 +19,24 @@ namespace CalculosBasicos.Client.Pages
         private string? Errors { get; set; }
 
         private bool EnableButtons  { get; set; } = false;
-
-        SendOperation data = new SendOperation();
-        CultureInfo mxCulture = new CultureInfo("en-US");
+         
         public async void SendRequestOperation(Operacion operation) 
         {
+            Errors = String.Empty;
+            Message = String.Empty;
             try
             {
                 if (EnableButtons)
-                {
-                    data.Operacion = operation;
-                    data.Val1 = double.Parse(Field1);
-                    data.Val2 = double.Parse(Field2);
-                    HttpResponseMessage result = await Http.PostAsJsonAsync<SendOperation>("/api/Operations", data);
+                { 
+                    HttpResponseMessage result = await Http.PostAsJsonAsync<SendOperation>("/api/Operations", Setdata(operation));
 
                     if (result.IsSuccessStatusCode)
                     {
-                        ResultOperation response = await result.Content.ReadFromJsonAsync<ResultOperation>();
+                        ResultOperation response = await result.Content.ReadFromJsonAsync<ResultOperation>() ?? new ResultOperation { Success = false, Errors = MessageErrors.General };
 
                         if (response.Success)
-                        {
-                            string fact = response.Operacion == Operacion.FACTORIAL ? $"Y {response.ResultV2.ToString("N2", mxCulture)}" : "";
-
-                            Message = $"EL RESULTADO DE {response.Operacion} ENTRE EL VALOR {response.Val1} " +
-                                $"{await GetSimbol(response.Operacion)} {response.Val2} ES : {response.Result.ToString("N2", mxCulture)} {fact}";
+                        { 
+                            Message = response.Response(); 
                         }
                         else
                         {
@@ -64,78 +56,27 @@ namespace CalculosBasicos.Client.Pages
             }
         }
 
-        private async Task<string> GetSimbol(Operacion operation) 
+        private SendOperation Setdata(Operacion operation) 
+            => new SendOperation() {
+                Operacion = operation,
+                Val1 = double.Parse(Field1 ?? String.Empty),
+                Val2 = double.Parse(Field2 ?? String.Empty)
+            };
+         
+        private async Task SetValue1(string value)
         {
-            string symbol = string.Empty;
-
-            switch (operation)
-            {
-                case Operacion.SUMA:
-                    symbol = "+";
-                    break;
-                case Operacion.RESTA:
-                    symbol = "-";
-                    break;
-                case Operacion.MULTIPLICACION:
-                    symbol = "*";
-                    break;
-                case Operacion.DIVISION:
-                    symbol = "/";
-                    break;
-                case Operacion.FACTORIAL:
-                    symbol = " Y ";
-                    break;
-                default:
-                    break;
-            }
-            return symbol;
-
+            Field1 = value;
+            await Buttons();
         }
 
-        private async Task ValidateField1(KeyboardEventArgs e) 
-        { 
-            decimal? numberValue = await ParseData(Field1);
-
-            if (numberValue == null)
-            {
-                MessageField1 = ErrorsValidations.ValidNumerics;
-                Field1 = string.Empty; 
-            }
-            else {
-                MessageField1 = string.Empty;
-                data.Val1 = double.Parse(Field1);
-            }
-
-            Buttons();
-        }
-
-        private async Task ValidateField2(KeyboardEventArgs e)
+        private async Task SetValue2(string value)
         {
-            decimal? numberValue = await ParseData(Field2);
-
-            if (numberValue == null)
-            {
-                MessageField2 = ErrorsValidations.ValidNumerics;
-                Field2 = string.Empty; 
-            }
-            else
-            {
-                MessageField2 = String.Empty;
-                data.Val2 = double.Parse(Field2);
-            }
-            Buttons();
+            Field2 = value;
+            await Buttons();
         }
-
-        private async void Buttons()
-        {
-            EnableButtons = string.IsNullOrWhiteSpace(Field2) || string.IsNullOrWhiteSpace(Field1) ? false : true;
-        }
-
-        private async Task<decimal?> ParseData(string value) 
-        { 
-            decimal? val = decimal.TryParse(value, out decimal result) ? decimal.Parse(value) : null;
-            return await Task.Run( () => val);
-        }
-
+         
+        private async Task Buttons() =>
+           await Task.Run(() => EnableButtons = string.IsNullOrWhiteSpace(Field2) || string.IsNullOrWhiteSpace(Field1) ? false : true);
+         
     }
 }

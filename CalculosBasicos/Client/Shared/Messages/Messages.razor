@@ -1,0 +1,20 @@
+﻿@using CalculosBasicos.Shared.Enums
+
+@switch (Level)
+{
+    case LevelMessage.Error : 
+        <div class="col-sm-12 text-danger">
+            @Message
+        </div>
+        break;
+    case LevelMessage.Warning : 
+        break;
+    case LevelMessage.Success : 
+        <div class="col-sm-12 texto-format">
+            @Message
+        </div>
+        break; 
+    default:
+        break;
+}
+ 

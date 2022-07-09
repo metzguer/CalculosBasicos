@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculosBasicos.Server", "CalculosBasicos\Server\CalculosBasicos.Server.csproj", "{0A9514A5-463B-4668-BB12-BAE14A44BAA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculosBasicos.Server", "CalculosBasicos\Server\CalculosBasicos.Server.csproj", "{0A9514A5-463B-4668-BB12-BAE14A44BAA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculosBasicos.Client", "CalculosBasicos\Client\CalculosBasicos.Client.csproj", "{539A2E81-C147-46F7-95F0-D209A5EAC695}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculosBasicos.Client", "CalculosBasicos\Client\CalculosBasicos.Client.csproj", "{539A2E81-C147-46F7-95F0-D209A5EAC695}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculosBasicos.Shared", "CalculosBasicos\Shared\CalculosBasicos.Shared.csproj", "{64566776-6E08-4C4A-8831-FB0FA5F7CF74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculosBasicos.Shared", "CalculosBasicos\Shared\CalculosBasicos.Shared.csproj", "{64566776-6E08-4C4A-8831-FB0FA5F7CF74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculosBasicos.Bussiness", "CalculosBasicos.Bussiness\CalculosBasicos.Bussiness.csproj", "{4FFA25C4-3232-4A96-B865-D34D63698B0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculosBasicos.Bussiness", "CalculosBasicos.Bussiness\CalculosBasicos.Bussiness.csproj", "{4FFA25C4-3232-4A96-B865-D34D63698B0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
