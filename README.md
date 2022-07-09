@@ -1,5 +1,5 @@
 <!-- GETTING STARTED -->
-## Disclaimer
+## Detalles
 
 Este proyecto se desarrollo usando Blazor WebAssembly, la version .Net 6 y el lenguaje de C# 
 
