@@ -23,16 +23,17 @@
             </form>
        </div>
 
-        <div class="col-sm-12">
+        <div class="col-sm-12 texto-format">
             @Message
         </div>
 
         <div class="col-sm-12 text-danger">
             @Errors
         </div>
+         
     </div>
 
-     <div class="col-sm-2 ">
+    <div class="col-sm-3 ">
          <button type="button" class="btn btn-primary form-control mt-3" @onclick="( () => SendRequestOperation(Operacion.SUMA) )">Suma</button>
          <button type="button" class="btn btn-primary form-control mt-3" @onclick="( () => SendRequestOperation(Operacion.RESTA) )">Resta</button>
          <button type="button" class="btn btn-primary form-control mt-3" @onclick="( () => SendRequestOperation(Operacion.MULTIPLICACION) )">Multiplicación</button>

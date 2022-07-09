@@ -1,4 +1,5 @@
 using CalculosBasicos.Server.Services;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddRazorPages();
 //separating dependencies
 RegisterServices.AddRegister(builder);
 
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

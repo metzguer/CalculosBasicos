@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Globalization;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace CalculosBasicos.Client.Pages
 {
@@ -24,33 +25,43 @@ namespace CalculosBasicos.Client.Pages
         SendOperation data = new SendOperation();
         CultureInfo mxCulture = new CultureInfo("en-US");
         public async void SendRequestOperation(Operacion operation) 
-        { 
-            if (EnableButtons) 
+        {
+            try
             {
-                data.Operacion = operation;
-                HttpResponseMessage result = await Http.PostAsJsonAsync<SendOperation>("/api/Operations", data);
-
-                if(result.IsSuccessStatusCode)
+                if (EnableButtons)
                 {
-                    ResultOperation response = await result.Content.ReadFromJsonAsync<ResultOperation>();
+                    data.Operacion = operation;
+                    data.Val1 = double.Parse(Field1);
+                    data.Val2 = double.Parse(Field2);
+                    HttpResponseMessage result = await Http.PostAsJsonAsync<SendOperation>("/api/Operations", data);
 
-                    if (response.Success)
+                    if (result.IsSuccessStatusCode)
                     {
-                        string fact = response.Operacion == Operacion.FACTORIAL ? $"Y { response.ResultV2.ToString("N2", mxCulture)}" : "";
+                        ResultOperation response = await result.Content.ReadFromJsonAsync<ResultOperation>();
 
-                        Message = $"EL RESULTADO DE {response.Operacion} ENTRE EL VALOR {response.Val1} " +
-                            $"{await GetSimbol(response.Operacion)} {response.Val2} ES : {response.Result.ToString("N2", mxCulture)} {fact}";
+                        if (response.Success)
+                        {
+                            string fact = response.Operacion == Operacion.FACTORIAL ? $"Y {response.ResultV2.ToString("N2", mxCulture)}" : "";
+
+                            Message = $"EL RESULTADO DE {response.Operacion} ENTRE EL VALOR {response.Val1} " +
+                                $"{await GetSimbol(response.Operacion)} {response.Val2} ES : {response.Result.ToString("N2", mxCulture)} {fact}";
+                        }
+                        else
+                        {
+                            Errors = response.Errors;
+                        }
                     }
-                    else 
-                    {
-                        Errors = response.Errors;
-                    } 
-                } 
-            } 
-            else{
+                }
+                else
+                {
+                    Errors = MessageErrors.General;
+                }
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
                 Errors = MessageErrors.General;
             }
-            StateHasChanged();
         }
 
         private async Task<string> GetSimbol(Operacion operation) 
