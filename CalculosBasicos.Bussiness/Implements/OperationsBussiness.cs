@@ -19,7 +19,7 @@ namespace CalculosBasicos.Bussiness.Implements
             }
 
             result.Success = true;
-            result.Result = value1.Value / value2.Value;
+            result.Result = $"{value1.Value / value2.Value}";
 
             return await Task.Run(() => result);
         }
@@ -37,8 +37,8 @@ namespace CalculosBasicos.Bussiness.Implements
             }
 
             result.Success = true;
-            result.Result = Factorial(value1.Value);
-            result.ResultV2 = Factorial(value2.Value);
+            result.Result = $"{Factorial(value1.Value)}";
+            result.ResultV2 = $"{Factorial(value2.Value)}";
 
             return await Task.Run(() => result);
         }
@@ -56,7 +56,7 @@ namespace CalculosBasicos.Bussiness.Implements
             }
 
             result.Success = true;
-            result.Result = value1.Value * value2.Value;
+            result.Result = $"{value1.Value * value2.Value}";
 
             return await Task.Run(() => result);
         }
@@ -74,7 +74,7 @@ namespace CalculosBasicos.Bussiness.Implements
             }
 
             result.Success = true;
-            result.Result = value1.Value - value2.Value;
+            result.Result = $"{value1.Value - value2.Value}";
 
             return await Task.Run(() => result);
         }
@@ -91,8 +91,8 @@ namespace CalculosBasicos.Bussiness.Implements
             }
 
             result.Success = true;
-            result.Result = value1.Value + value2.Value;
-             
+            result.Result = $"{value1.Value + value2.Value}";
+
             return await Task.Run(()=> result);
         }
 

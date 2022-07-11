@@ -1,6 +1,6 @@
 using CalculosBasicos.Server.Services;
-using Microsoft.AspNetCore.Http.Json;
-using Microsoft.AspNetCore.ResponseCompression;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,6 @@ builder.Services.AddRazorPages();
 
 //separating dependencies
 RegisterServices.AddRegister(builder);
-
  
 var app = builder.Build();
 

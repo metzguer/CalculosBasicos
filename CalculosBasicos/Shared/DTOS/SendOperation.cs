@@ -1,11 +1,15 @@
 ﻿using CalculosBasicos.Shared.Utils;
+using Newtonsoft.Json;
 
 namespace CalculosBasicos.Shared.DTOS
 {
     public class SendOperation
     {
-        public double Val1 { get; set; }
-        public double Val2 { get; set; }
+        [JsonProperty("Val1")]
+        public string Val1 { get; set; }
+        [JsonProperty("Val2")]
+        public string Val2 { get; set; }
+        [JsonProperty("Operacion")]
         public Operacion Operacion { get; set; }
     }
 }

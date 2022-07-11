@@ -4,7 +4,9 @@ using CalculosBasicos.Shared.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Globalization;
+using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 
 namespace CalculosBasicos.Client.Pages
@@ -27,7 +29,15 @@ namespace CalculosBasicos.Client.Pages
             try
             {
                 if (EnableButtons)
-                { 
+                {
+                    var data = new SendOperation()
+                    {
+                        Operacion = operation,
+                        Val1 = Field1 ,
+                        Val2 = Field2 
+                    };
+
+                 
                     HttpResponseMessage result = await Http.PostAsJsonAsync<SendOperation>("/api/Operations", Setdata(operation));
 
                     if (result.IsSuccessStatusCode)
@@ -59,8 +69,8 @@ namespace CalculosBasicos.Client.Pages
         private SendOperation Setdata(Operacion operation) 
             => new SendOperation() {
                 Operacion = operation,
-                Val1 = double.Parse(Field1 ?? String.Empty),
-                Val2 = double.Parse(Field2 ?? String.Empty)
+                Val1 = Field1 ,
+                Val2 = Field2 
             };
          
         private async Task SetValue1(string value)
