@@ -20,37 +20,28 @@ namespace CalculosBasicos.Server.Controllers
         public async Task<ResultOperation> Index([FromBody] SendOperation dataOperations)  
         {
             ResultOperation response = new ResultOperation();
-            try
+            
+            switch (dataOperations.Operacion)
             {
-               
-
-                switch (dataOperations.Operacion)
-                {
-                    case Operacion.SUMA:
-                        response = await _operationsBussiness.Suma(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
-                        break;
-                    case Operacion.RESTA:
-                        response = await _operationsBussiness.Resta(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
-                        break;
-                    case Operacion.MULTIPLICACION:
-                        response = await _operationsBussiness.Multiplicacion(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
-                        break;
-                    case Operacion.DIVISION:
-                        response = await _operationsBussiness.Division(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
-                        break;
-                    case Operacion.FACTORIAL:
-                        response = await _operationsBussiness.Factorial(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
-                        break;
-                    default:
-                        break;
-                }
+                case Operacion.SUMA:
+                    response = await _operationsBussiness.Suma(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
+                    break;
+                case Operacion.RESTA:
+                    response = await _operationsBussiness.Resta(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
+                    break;
+                case Operacion.MULTIPLICACION:
+                    response = await _operationsBussiness.Multiplicacion(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
+                    break;
+                case Operacion.DIVISION:
+                    response = await _operationsBussiness.Division(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
+                    break;
+                case Operacion.FACTORIAL:
+                    response = await _operationsBussiness.Factorial(double.Parse(dataOperations.Val1), double.Parse(dataOperations.Val2));
+                    break;
+                default:
+                    break;
             }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-
+           
             return await Task.Run(() => response);
         }
     }
